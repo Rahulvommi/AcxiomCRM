@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Add Opportunity - AcxiomCRM</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <div class="card shadow-sm border-0 mx-auto"
+         style="max-width:750px;">
+
+        <div class="card-body p-4">
+
+            <h3 class="mb-4">
+                Add Opportunity
+            </h3>
+
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Opportunity Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        maxlength="150"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Customer *
+                    </label>
+
+                    <select
+                        name="customer"
+                        class="form-select"
+                        required>
+
+                        <option value="">
+                            Select Customer
+                        </option>
+
+                        {% for customer in customers %}
+
+                        <option value="{{ customer.id }}">
+                            {{ customer.name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Stage
+                        </label>
+
+                        <select
+                            name="stage"
+                            class="form-select">
+
+                            <option value="Qualification">
+                                Qualification
+                            </option>
+
+                            <option value="Proposal">
+                                Proposal
+                            </option>
+
+                            <option value="Negotiation">
+                                Negotiation
+                            </option>
+
+                            <option value="Won">
+                                Won
+                            </option>
+
+                            <option value="Lost">
+                                Lost
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Amount *
+                        </label>
+
+                        <input
+                            type="number"
+                            name="amount"
+                            class="form-control"
+                            min="0.01"
+                            step="0.01"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Probability (%) *
+                        </label>
+
+                        <input
+                            type="number"
+                            name="probability"
+                            class="form-control"
+                            min="0"
+                            max="100"
+                            required>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Expected Close Date *
+                        </label>
+
+                        <input
+                            type="date"
+                            name="expected_close_date"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Source
+                    </label>
+
+                    <input
+                        type="text"
+                        name="source"
+                        class="form-control">
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Notes
+                    </label>
+
+                    <textarea
+                        name="notes"
+                        class="form-control"
+                        rows="3"></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Save Opportunity
+
+                </button>
+
+
+                <a
+                    href="{% url 'opportunity_list' %}"
+                    class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
